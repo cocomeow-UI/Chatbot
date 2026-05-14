@@ -33,11 +33,14 @@ const Chatbot: React.FC = () => {
     try {
       const assistantMessage = await sendMessage(newMessages);
       setMessages((prev) => [...prev, assistantMessage]);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Chat Error:', error);
       setMessages((prev) => [
         ...prev,
-        { role: 'assistant', content: '죄송합니다. 오류가 발생했습니다. 다시 시도해 주세요.' }
+        { 
+          role: 'assistant', 
+          content: `죄송합니다. 오류가 발생했습니다.\n원인: ${error.message || '알 수 없는 오류'}` 
+        }
       ]);
     } finally {
       setIsLoading(false);

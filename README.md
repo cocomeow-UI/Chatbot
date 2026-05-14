@@ -1,73 +1,36 @@
-# React + TypeScript + Vite
+# 영단어 퀴즈 챗봇
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+사용자가 원하는 주제와 난이도에 맞춰 영어 단어를 학습하고 퀴즈를 풀 수 있는 챗봇입니다.
 
-Currently, two official plugins are available:
+## 기술 스택
+- **Frontend**: React, TypeScript, Vite, Lucide React
+- **Backend**: Vercel Serverless Functions (Edge Runtime)
+- **AI**: OpenAI API (gpt-4o-mini)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 로컬 설정
 
-## React Compiler
+1. 저장소를 클론합니다.
+2. `.env.local` 파일을 생성하고 OpenAI API 키를 입력합니다.
+   ```env
+   OPENAI_API_KEY=your_api_key_here
+   ```
+3. 의존성을 설치합니다.
+   ```bash
+   npm install
+   ```
+4. 개발 서버를 실행합니다.
+   ```bash
+   npm run dev
+   ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Vercel 배포 시 설정 방법
 
-## Expanding the ESLint configuration
+1. [Vercel 대시보드](https://vercel.com)에서 프로젝트를 생성합니다.
+2. **Project Settings > Environment Variables**로 이동합니다.
+3. 다음 변수를 추가합니다.
+   - `OPENAI_API_KEY`: 발급받은 OpenAI API 키
+4. 프로젝트를 다시 배포(Redeploy)합니다.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 주의 사항
+- API Key는 절대로 Git에 커밋하지 마세요. `.gitignore`에 `.env.local`이 포함되어 있는지 확인하세요.
+- 답변이 "죄송합니다"로 시작하는 에러가 발생하면, 화면에 표시되는 상세 원인을 확인해주세요.

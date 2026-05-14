@@ -19,8 +19,8 @@ export async function sendMessage(messages: Message[]): Promise<Message> {
   });
 
   if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.error || 'Failed to fetch from API');
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.error || `서버 오류: ${response.status} ${response.statusText}`);
   }
 
   const data: ChatResponse = await response.json();
